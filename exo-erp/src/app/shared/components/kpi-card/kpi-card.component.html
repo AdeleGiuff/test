@@ -1,14 +1,17 @@
 <div class="kpi-card page-card" [class.green]="variant === 'green'" [class.orange]="variant === 'orange'"
     [class.red]="variant === 'red'">
-    <div class="top">
-        <div class="icon-wrap">
+    <div class="kpi-top">
+        <div class="kpi-icon-wrap">
             <span class="material-icons-round">{{ icon }}</span>
         </div>
 
-        <div class="trend mono">{{ trend }}</div>
+        <div class="kpi-trend mono">{{ trend }}</div>
     </div>
 
-    <div class="value mono">{{ value }}</div>
-    <div class="label">{{ label }}</div>
-    <div class="progress"></div>
+    <div class="kpi-value mono">{{ value }}</div>
+    <div class="kpi-label">{{ label }}</div>
+
+    <div class="kpi-progress">
+        <div class="kpi-progress-fill"></div>
+    </div>
 </div>

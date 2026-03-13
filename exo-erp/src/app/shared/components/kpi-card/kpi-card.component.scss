@@ -1,9 +1,22 @@
+:host {
+  display: block;
+}
+
 .kpi-card {
-  padding: 20px 22px 16px;
   position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  transition: var(--t);
+  min-height: 176px;
+  padding: 20px 22px;
+  border-radius: 14px;
+  border: var(--border);
   border-bottom: 3px solid var(--accent);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--t),
+    box-shadow var(--t);
 }
 
 .kpi-card:hover {
@@ -11,106 +24,139 @@
   box-shadow: var(--shadow-md);
 }
 
+.kpi-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kpi-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(67, 97, 238, 0.1);
+  color: var(--accent);
+  flex: 0 0 auto;
+}
+
+.kpi-icon-wrap .material-icons-round {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+}
+
+.kpi-trend {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: rgba(14, 173, 105, 0.08);
+  color: var(--green);
+  flex: 0 0 auto;
+}
+
+.kpi-value {
+  margin-top: 24px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+}
+
+.kpi-label {
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.kpi-progress {
+  margin-top: auto;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.kpi-progress-fill {
+  width: 72%;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
 .kpi-card.green {
   border-bottom-color: var(--green);
+}
+
+.kpi-card.green .kpi-icon-wrap {
+  background: rgba(14, 173, 105, 0.1);
+  color: var(--green);
+}
+
+.kpi-card.green .kpi-progress-fill {
+  background: var(--green);
 }
 
 .kpi-card.orange {
   border-bottom-color: var(--orange);
 }
 
-.kpi-card.red {
-  border-bottom-color: var(--red);
-}
-
-.top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.icon-wrap {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(67, 97, 238, 0.1);
-  color: var(--accent);
-  display: grid;
-  place-items: center;
-}
-
-.green .icon-wrap {
-  background: rgba(14, 173, 105, 0.1);
-  color: var(--green);
-}
-
-.orange .icon-wrap {
+.kpi-card.orange .kpi-icon-wrap {
   background: rgba(247, 127, 0, 0.1);
   color: var(--orange);
 }
 
-.red .icon-wrap {
+.kpi-card.orange .kpi-progress-fill {
+  background: var(--orange);
+}
+
+.kpi-card.red {
+  border-bottom-color: var(--red);
+}
+
+.kpi-card.red .kpi-icon-wrap {
   background: rgba(214, 40, 57, 0.1);
   color: var(--red);
 }
 
-.value {
-  margin-top: 16px;
-  font-size: 21px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  color: var(--ink);
+.kpi-card.red .kpi-progress-fill {
+  background: var(--red);
 }
 
-.label {
-  margin-top: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.9px;
-  color: var(--muted);
-  text-transform: uppercase;
-}
-
-.trend {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: 20px;
-  background: rgba(14, 173, 105, 0.08);
-  color: var(--green);
-}
-
-.red .trend {
+.kpi-card.red .kpi-trend {
   background: rgba(214, 40, 57, 0.08);
   color: var(--red);
 }
 
-.progress {
-  margin-top: 14px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--surface-2);
-  overflow: hidden;
-  position: relative;
+@media (max-width: 1280px) {
+  .kpi-card {
+    min-height: 160px;
+  }
 }
 
-.progress::after {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 72%;
-  background: var(--accent);
-  border-radius: inherit;
-}
+@media (max-width: 720px) {
+  .kpi-card {
+    min-height: 148px;
+    padding: 18px 18px;
+  }
 
-.green .progress::after {
-  background: var(--green);
-}
+  .kpi-value {
+    margin-top: 20px;
+    font-size: 19px;
+  }
 
-.orange .progress::after {
-  background: var(--orange);
-}
-
-.red .progress::after {
-  background: var(--red);
+  .kpi-label {
+    margin-top: 12px;
+  }
 }

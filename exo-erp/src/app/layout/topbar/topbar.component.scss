@@ -8,6 +8,7 @@
   left: var(--sidebar-w);
   width: calc(100% - var(--sidebar-w));
   height: var(--topbar-h);
+  z-index: 1000;
 
   background: var(--card);
   border-bottom: var(--border);
@@ -15,7 +16,7 @@
 
   display: flex;
   align-items: center;
-
+  justify-content: space-between;
   padding: 0 24px;  
 }
 
@@ -33,6 +34,7 @@
 }
 
 .page-title {
+  font-family: 'Syne', sans-serif;
   font-size: 17px;
   font-weight: 700;
   line-height: 1.05;
@@ -89,8 +91,8 @@
 /* 2.3 Notif Dot */
 .notif-dot {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: -2px;
+  right: -2px;
   width: 15px;
   height: 15px;
   border-radius: 50%;
@@ -111,7 +113,7 @@
 .separator {
   width: 1px;
   height: 26px;
-  background: rgba(60, 80, 180, 0.18);
+  background: var(--border-2);
   margin: 0 4px;
   flex: 0 0 auto;
 }

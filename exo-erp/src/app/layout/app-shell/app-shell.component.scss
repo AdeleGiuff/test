@@ -8,6 +8,8 @@
   min-height: calc(100vh - var(--topbar-h));
   padding: var(--spacing-xl) var(--spacing-xl-2);
   background: var(--surface);
+  position: relative;
+  z-index: 1;
 }
 
 
