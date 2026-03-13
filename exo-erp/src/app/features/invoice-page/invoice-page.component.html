@@ -1,0 +1,185 @@
+<section class="kpi-grid">
+    <app-kpi-card icon="receipt_long" value="248" label="Fatture emesse" trend="+12%" variant="blue" />
+    <app-kpi-card icon="check_circle" value="€ 184.320" label="Incassato" trend="+8%" variant="green" />
+    <app-kpi-card icon="schedule" value="€ 42.150" label="In attesa" trend="-3%" variant="orange" />
+    <app-kpi-card icon="warning" value="€ 11.800" label="Scaduto" trend="-1%" variant="red" />
+</section>
+
+<section class="invoice-list page-card">
+    <div class="panel-header">
+        <div class="title-block">
+            <div class="panel-title syne">Elenco Fatture</div>
+            <div class="panel-sub">Seleziona una fattura per visualizzare il dettaglio</div>
+        </div>
+
+        <div class="total-chip mono">{{ filteredInvoices.length }} TOTALI</div>
+
+        <div class="search-box">
+            <span class="material-icons-round">search</span>
+            <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Cerca fattura, cliente..." />
+        </div>
+
+        <button class="ghost-btn">Filtri</button>
+        <button class="primary-btn">
+            <span class="material-icons-round">add</span>
+            Nuova Fattura
+        </button>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>N° FATTURA</th>
+                    <th>CLIENTE</th>
+                    <th>DATA EMISSIONE</th>
+                    <th>SCADENZA</th>
+                    <th>IMPONIBILE</th>
+                    <th>IVA</th>
+                    <th>TOTALE</th>
+                    <th>STATO</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (invoice of filteredInvoices; track invoice.id) {
+                <tr (click)="selectInvoice(invoice)" [class.selected]="selectedInvoice.id === invoice.id">
+                    <td class="invoice-id mono">{{ invoice.id }}</td>
+
+                    <td>
+                        <div class="customer-name">{{ invoice.customer }}</div>
+                        <div class="customer-vat mono">P. IVA {{ invoice.vatNumber }}</div>
+                    </td>
+
+                    <td class="date-cell">{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</td>
+                    <td class="date-cell">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}</td>
+                    <td class="amount mono">{{ formatEuro(invoice.taxableAmount) }}</td>
+                    <td class="vat mono muted-amount">{{ formatEuro(invoice.vatAmount) }}</td>
+                    <td class="amount mono">{{ formatEuro(invoice.totalAmount) }}</td>
+
+                    <td>
+                        <app-status-badge [status]="invoice.status" />
+                    </td>
+
+                    <td class="row-actions-cell">
+                        <div class="row-actions">
+                            <button class="row-icon-btn" type="button" (click)="$event.stopPropagation()">
+                                <span class="material-icons-round">visibility</span>
+                            </button>
+                            <button class="row-icon-btn" type="button" (click)="$event.stopPropagation()">
+                                <span class="material-icons-round">print</span>
+                            </button>
+                            <button class="row-icon-btn" type="button" (click)="$event.stopPropagation()">
+                                <span class="material-icons-round">open_in_new</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section #detailPanel class="detail-panel fade-up">
+    <div class="detail-header">
+        <div class="left">
+            <div class="detail-id mono">{{ selectedInvoice.id }}</div>
+            <div class="detail-customer">
+                {{ selectedInvoice.customer }} — P.IVA {{ selectedInvoice.vatNumber }}
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="meta">
+                <div class="meta-label">EMISSIONE</div>
+                <div class="meta-value mono">
+                    {{ selectedInvoice.issueDate | date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+
+            <div class="meta">
+                <div class="meta-label">SCADENZA</div>
+                <div class="meta-value mono">
+                    {{ selectedInvoice.dueDate | date: 'dd/MM/yyyy' }}
+                </div>
+            </div>
+
+            <div class="meta">
+                <div class="meta-label">STATO</div>
+                <div class="meta-value">
+                    <app-status-badge [status]="selectedInvoice.status" />
+                </div>
+            </div>
+
+            <div class="meta total-meta">
+                <div class="meta-label">TOTALE FATTURA</div>
+                <div class="meta-total mono">
+                    {{ formatEuro(selectedInvoice.totalAmount) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-table-header">Righe di Dettaglio</div>
+
+    <div class="detail-table-wrap page-card">
+        <table>
+            <thead>
+                <tr>
+                    <th>CODICE</th>
+                    <th>DESCRIZIONE</th>
+                    <th>QUANTITÀ</th>
+                    <th>PREZZO UNIT.</th>
+                    <th>IVA %</th>
+                    <th>IVA €</th>
+                    <th>TOTALE RIGA</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (row of selectedInvoice.rows; track row.code) {
+                <tr>
+                    <td>
+                        <span class="code-pill mono">{{ row.code }}</span>
+                    </td>
+
+                    <td>
+                        <div class="row-desc">{{ row.description }}</div>
+                        <div class="row-unit">{{ row.unit }}</div>
+                    </td>
+
+                    <td class="mono align-right">{{ row.quantity }}</td>
+                    <td class="mono align-right">{{ formatEuro(row.unitPrice) }}</td>
+                    <td class="mono align-right">{{ row.vatRate }}%</td>
+                    <td class="mono align-right">{{ formatEuro(row.vatAmount) }}</td>
+                    <td class="mono align-right total-line">{{ formatEuro(row.total) }}</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="detail-footer">
+            <div class="footer-note">
+                <span class="material-icons-round">info</span>
+                <span>{{ selectedInvoice.note }}</span>
+            </div>
+
+            <div class="totals">
+                <div class="total-row">
+                    <span>Imponibile</span>
+                    <strong class="mono">{{ formatEuro(selectedInvoice.taxableAmount) }}</strong>
+                </div>
+                <div class="total-row">
+                    <span>IVA (22%)</span>
+                    <strong class="mono">{{ formatEuro(selectedInvoice.vatAmount) }}</strong>
+                </div>
+                <div class="total-row grand">
+                    <span>TOTALE FATTURA</span>
+                    <strong class="mono">{{ formatEuro(selectedInvoice.totalAmount) }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

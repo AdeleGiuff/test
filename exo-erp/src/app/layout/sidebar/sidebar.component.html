@@ -1,0 +1,77 @@
+<aside class="sidebar">
+    <div class="sidebar-inner">
+        <div class="brand">
+            <div class="logo-mark">
+                <span class="logo-mark-text syne">EX</span>
+            </div>
+
+            <div class="brand-copy">
+                <div class="brand-title syne">ExoERP</div>
+                <div class="brand-sub">ENTERPRISE SUITE</div>
+            </div>
+        </div>
+
+        <section class="nav-section">
+            <div class="section-label">PRINCIPALE</div>
+
+            @for (item of primaryItems; track item.label) {
+            <button class="nav-item" [class.active]="item.active" type="button">
+                <span class="nav-icon material-icons-round">{{ item.icon }}</span>
+                <span class="nav-label">{{ item.label }}</span>
+
+                @if (item.badge) {
+                <span class="nav-badge mono" [class.badge-blue]="item.badgeVariant === 'blue'"
+                    [class.badge-orange]="item.badgeVariant === 'orange'">
+                    {{ item.badge }}
+                </span>
+                }
+            </button>
+            }
+        </section>
+
+        <section class="nav-section">
+            <div class="section-label">CONTABILITÀ</div>
+
+            @for (item of accountingItems; track item.label) {
+            <button class="nav-item" type="button">
+                <span class="nav-icon material-icons-round">{{ item.icon }}</span>
+                <span class="nav-label">{{ item.label }}</span>
+
+                @if (item.badge) {
+                <span class="nav-badge mono" [class.badge-blue]="item.badgeVariant === 'blue'"
+                    [class.badge-orange]="item.badgeVariant === 'orange'">
+                    {{ item.badge }}
+                </span>
+                }
+            </button>
+            }
+        </section>
+
+        <section class="nav-section">
+            <div class="section-label">SISTEMA</div>
+
+            @for (item of systemItems; track item.label) {
+            <button class="nav-item" type="button">
+                <span class="nav-icon material-icons-round">{{ item.icon }}</span>
+                <span class="nav-label">{{ item.label }}</span>
+            </button>
+            }
+        </section>
+
+        <footer class="sidebar-footer">
+            <button class="user-row" type="button">
+                <div class="avatar-wrap">
+                    <div class="avatar">{{ user.initials }}</div>
+                    <span class="presence-dot" [class]="user.status"></span>
+                </div>
+
+                <div class="user-copy">
+                    <div class="user-name">{{ user.name }}</div>
+                    <div class="user-role">{{ user.role }}</div>
+                </div>
+
+                <span class="material-icons-round more-icon">more_horiz</span>
+            </button>
+        </footer>
+    </div>
+</aside>

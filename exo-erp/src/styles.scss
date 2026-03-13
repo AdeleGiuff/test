@@ -1,0 +1,154 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// html {
+//   height: 100%;
+//   @include mat.theme(
+//     (
+//       color: (
+//         primary: mat.$azure-palette,
+//         tertiary: mat.$blue-palette,
+//       ),
+//       typography: Roboto,
+//       density: 0,
+//     )
+//   );
+// }
+:root {
+  --ink: #0b0f1a;
+  --ink-2: #1e2640;
+  --ink-3: #3d4668;
+  --muted: #8b96b8;
+  --muted-2: #c2c9e0;
+  --accent: #4361ee;
+  --accent-2: #3a0ca3;
+  --surface: #f0f2f8;
+  --surface-2: #e4e8f4;
+  --card: #ffffff;
+
+  --green: #0ead69;
+  --green-bg: #e6f9f0;
+  --orange: #f77f00;
+  --orange-bg: #fff3e0;
+  --red: #d62839;
+  --red-bg: #fdeaea;
+  --slate: #64748b;
+  --slate-bg: #f1f5f9;
+  --notif-red: #f72585;
+
+  --sidebar-w: 256px;
+  --topbar-h: 60px;
+
+  --r: 14px;
+  --r-sm: 8px;
+
+  --border: 1px solid rgba(60, 80, 180, 0.10);
+  --border-2: 1px solid rgba(60, 80, 180, 0.18);
+
+  --shadow-sm: 0 2px 12px rgba(11, 15, 26, 0.08);
+  --shadow-md: 0 8px 32px rgba(11, 15, 26, 0.13);
+  --shadow-sidebar: 0 0 40px rgba(11, 15, 26, 0.3);
+  --shadow-accent: 0 4px 16px rgba(67, 97, 238, 0.5);
+
+  --t: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-md-2: 16px;
+  --spacing-lg: 20px;
+  --spacing-lg-2: 24px;
+  --spacing-xl: 28px;
+  --spacing-xl-2: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--surface);
+  color: var(--ink);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  //WHY?
+  // height: 100%;
+  min-height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+  border-radius: var(--r-sm);
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.material-icons-round {
+  font-family: 'Material Icons Round';
+}
+
+.page-card {
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.fade-up {
+  animation: fadeUp 0.3s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
