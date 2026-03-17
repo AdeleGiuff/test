@@ -15,7 +15,14 @@
             <div class="panel-sub text-caption">Seleziona una fattura per visualizzare il dettaglio</div>
         </div>
 
-        <div class="total-chip text-xs">{{ filteredInvoices.length }} TOTALI</div>
+        @if(filteredInvoices.length > 0) {
+        <div class="total-chip text-xs">
+            {{ filteredInvoices.length }} {{ filteredInvoices.length === 1 ?
+            'TOTALE'
+            :
+            'TOTALI' }}
+        </div>
+        }
 
         <div class="search-box">
             <span class="material-icons-round">search</span>
