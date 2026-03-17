@@ -23,14 +23,11 @@
 }
 
 .panel-title {
-  font-size: 14.5px;
-  font-weight: 700;
   color: var(--ink);
 }
 
 .panel-sub {
   margin-top: 3px;
-  font-size: 11.5px;
   color: var(--muted);
 }
 
@@ -39,8 +36,6 @@
   border-radius: 999px;
   background: rgba(67, 97, 238, 0.1);
   color: var(--accent);
-  font-size: 10.5px;
-  font-weight: 700;
 }
 
 .search-box {
@@ -62,18 +57,11 @@
   background: var(--card);
 }
 
-.search-box span {
-  font-size: 17px;
-  color: var(--muted);
-}
-
 .search-box input {
   border: 0;
   outline: none;
   background: transparent;
   width: 100%;
-  font-size: 13px;
-  font-weight: 400;
   color: var(--ink);
 }
 
@@ -88,8 +76,6 @@
   border-radius: 8px;
   cursor: pointer;
   transition: var(--t);
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .ghost-btn {
@@ -122,56 +108,49 @@
   overflow-x: auto;
 }
 
-table {
+.table-wrap table {
   min-width: 100%;
   table-layout: fixed;
   position: relative;
 }
 
-table thead th {
+.table-wrap table thead th {
   text-align: left;
   padding: 11px 14px;
   background: var(--surface);
   border-bottom: var(--border-2);
   color: var(--muted);
-  font-size: 10.5px;
-  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-table tbody td {
+.table-wrap table tbody td {
   padding: 12px 17px;
   border-bottom: var(--border);
-  font-size: 13.5px;
   vertical-align: middle;
 }
 
-tbody tr {
+.table-wrap tbody tr {
   cursor: pointer;
   transition: var(--t);
   position: relative;
 }
 
-tbody tr:hover {
+.table-wrap tbody tr:hover {
   background: #f7f8ff;
 }
 
-tbody tr.selected {
+.table-wrap tbody tr.selected {
   background: linear-gradient(90deg, #eef1fd, #f5f7ff);
   box-shadow: inset 3px 0 0 var(--accent);
 }
 
 .invoice-id {
   color: var(--accent);
-  font-size: 12.5px;
-  font-weight: 600;
 }
 
 .customer-name {
-  font-size: 13.5px;
-  font-weight: 600;
   color: var(--ink);
   line-height: 1.15;
   word-break: break-word;
@@ -179,8 +158,6 @@ tbody tr.selected {
 
 .customer-vat {
   margin-top: 4px;
-  font-size: 10.5px;
-  font-weight: 400;
   color: var(--muted);
 }
 
@@ -189,14 +166,11 @@ tbody tr.selected {
 }
 
 .amount {
-  font-size: 13.5px;
-  font-weight: 700;
   color: var(--ink);
 }
 
 .muted-amount {
   color: var(--muted);
-  font-weight: 500;
 }
 
 .amount,
@@ -219,8 +193,8 @@ tbody tr.selected {
   transition: var(--t);
 }
 
-tbody tr:hover .row-actions {
-  opacity: 1; 
+.table-wrap tbody tr:hover .row-actions {
+  opacity: 1;
 }
 
 .row-icon-btn {
@@ -243,6 +217,7 @@ tbody tr:hover .row-actions {
   margin-top: 22px;
   border-radius: var(--r);
   overflow: hidden;
+  animation: fadeUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .detail-header {
@@ -253,6 +228,7 @@ tbody tr:hover .row-actions {
   align-items: flex-start;
   gap: 20px;
   overflow: hidden;
+  animation: fadeUp 0.3s ease forwards;
 }
 
 .detail-header::before {
@@ -291,36 +267,28 @@ tbody tr:hover .row-actions {
 }
 
 .detail-id {
-  font-size: 20px;
-  font-weight: 700;
   color: white;
   letter-spacing: 0.3px;
 }
 
 .detail-customer {
   margin-top: 6px;
-  font-size: 13px;
   color: rgba(255, 255, 255, 0.68);
 }
 
 .meta-label {
-  font-size: 9.5px;
-  font-weight: 700;
   letter-spacing: 1.2px;
   color: rgba(255, 255, 255, 0.35);
   margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .meta-value {
   color: white;
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .meta-total {
   color: #4fe3ff;
-  font-size: 19px;
-  font-weight: 800;
 }
 
 .detail-table-header {
@@ -329,8 +297,6 @@ tbody tr:hover .row-actions {
   border-left: var(--border);
   border-right: var(--border);
   border-top: var(--border);
-  font-size: 10px;
-  font-weight: 700;
   letter-spacing: 0.9px;
   color: var(--muted);
   text-transform: uppercase;
@@ -340,6 +306,13 @@ tbody tr:hover .row-actions {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   overflow: hidden;
+  animation: fadeUp 0.3s ease forwards;
+  animation-delay: 0.05s;
+}
+
+.detail-table-wrap table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 .code-pill {
@@ -347,19 +320,15 @@ tbody tr:hover .row-actions {
   padding: 2px 6px;
   border-radius: 4px;
   background: var(--surface);
-  font-size: 11px;
   color: var(--muted);
 }
 
 .row-desc {
-  font-size: 13px;
-  font-weight: 500;
   color: var(--ink);
 }
 
 .row-unit {
   margin-top: 4px;
-  font-size: 11px;
   color: var(--muted);
 }
 
@@ -369,7 +338,6 @@ tbody tr:hover .row-actions {
 
 .total-line {
   color: var(--accent);
-  font-weight: 700;
 }
 
 .detail-footer {
@@ -380,6 +348,8 @@ tbody tr:hover .row-actions {
   padding: 18px 22px;
   background: var(--surface);
   border-top: var(--border);
+  animation: fadeUp 0.3s ease forwards;
+  animation-delay: 0.1s;
 }
 
 .footer-note {
@@ -387,7 +357,6 @@ tbody tr:hover .row-actions {
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 12px;
   font-style: italic;
 }
 
@@ -404,50 +373,15 @@ tbody tr:hover .row-actions {
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 8px;
-  font-size: 13px;
   color: var(--ink);
 }
 
 .total-row.grand {
   margin-top: 12px;
-  font-size: 13.5px;
-  font-weight: 700;
 }
 
 .total-row.grand strong {
   color: var(--accent);
-  font-size: 17px;
-  font-weight: 800;
-}
-
-@media (max-width: 1300px) {
-  .kpi-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .panel-header {
-    flex-wrap: wrap;
-  }
-
-  .detail-header {
-    flex-direction: column;
-  }
-
-  .detail-header .right {
-    margin-left: 0;
-    flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 720px) {
-  .kpi-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.detail-table-wrap table {
-  width: 100%;
-  table-layout: fixed;
 }
 
 .detail-table-wrap th:nth-child(3),
@@ -486,4 +420,29 @@ tbody tr:hover .row-actions {
 .detail-table-wrap td:nth-child(6),
 .detail-table-wrap td:nth-child(7) {
   font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1300px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .panel-header {
+    flex-wrap: wrap;
+  }
+
+  .detail-header {
+    flex-direction: column;
+  }
+
+  .detail-header .right {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
 }

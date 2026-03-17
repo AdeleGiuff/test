@@ -1,8 +1,8 @@
 <header class="topbar">
     <div class="topbar-left">
         <div class="page-title-wrap">
-            <h1 class="page-title">{{ pageTitle }}</h1>
-            <span class="page-sub">{{ pageSub }}</span>
+            <h1 class="page-title text-h1">{{ pageTitle }}</h1>
+            <span class="page-sub text-caption">{{ pageSub }}</span>
         </div>
     </div>
 
@@ -12,7 +12,7 @@
             <span class="material-icons-round icon-glyph">{{ action.icon }}</span>
 
             @if (action.count) {
-            <span class="notif-dot mono">{{ action.count }}</span>
+            <span class="notif-dot text-notif">{{ action.count }}</span>
             }
         </button>
         }
@@ -20,11 +20,11 @@
         <span class="separator" aria-hidden="true"></span>
 
         <button class="user-chip" type="button" aria-label="Profilo utente">
-            <div class="user-avatar">{{ user.initials }}</div>
+            <div class="user-avatar text-mono-sm">{{ user.initials }}</div>
 
             <div class="user-meta">
-                <div class="user-name">{{ user.name }}</div>
-                <div class="user-role">{{ user.role }}</div>
+                <div class="user-name text-body">{{ user.name }}</div>
+                <div class="user-role text-caption">{{ user.role }}</div>
             </div>
 
             <span class="material-icons-round user-chevron">expand_more</span>

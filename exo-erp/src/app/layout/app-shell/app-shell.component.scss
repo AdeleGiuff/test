@@ -6,21 +6,8 @@
   margin-left: var(--sidebar-w);
   margin-top: var(--topbar-h);
   min-height: calc(100vh - var(--topbar-h));
-  padding: var(--spacing-xl) var(--spacing-xl-2);
+  padding: var(--content-py) var(--content-px);
   background: var(--surface);
   position: relative;
   z-index: 1;
-}
-
-
-@media (max-width: 1200px) {
-  .app-content {
-    padding: 24px 24px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .app-content {
-    padding: 20px 20px;
-  }
 }

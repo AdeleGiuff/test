@@ -1,23 +1,5 @@
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-// html {
-//   height: 100%;
-//   @include mat.theme(
-//     (
-//       color: (
-//         primary: mat.$azure-palette,
-//         tertiary: mat.$blue-palette,
-//       ),
-//       typography: Roboto,
-//       density: 0,
-//     )
-//   );
-// }
 :root {
   --ink: #0b0f1a;
   --ink-2: #1e2640;
@@ -64,6 +46,53 @@
   --spacing-lg-2: 24px;
   --spacing-xl: 28px;
   --spacing-xl-2: 32px;
+
+  --content-py: 28px;
+  --content-px: 32px;
+  --topbar-px: 24px;
+
+  --avatar-gradient: linear-gradient(135deg, #4361ee 0%, #27d7ff 100%);
+  --logo-gradient: linear-gradient(135deg, #24d6ff 0%, #4361ee 52%, #3a0ca3 100%);
+
+// Tokens tipografia
+  --text-display: 800 24px/1.2 'Syne';
+
+  --text-h1: 700 17px/1.05 'Syne';
+  --text-h2: 700 14.5px/1.1 'Syne';
+
+  --text-body-lg: 400 13.5px/1.2 'Inter';
+  --text-body: 400 13px/1.2 'Inter';
+  --text-caption: 400 11.5px/1.2 'Inter';
+  --text-xs: 600 10px/1.2 'Inter';
+
+  --text-mono-lg: 700 21px/1.05 'JetBrains Mono';
+  --text-mono: 700 13.5px/1.2 'JetBrains Mono';
+  --text-mono-sm: 400 11px/1.2 'JetBrains Mono';
+  --text-mono-xs-bold: 700 11px/1 'JetBrains Mono';
+  --text-notif: 700 8.5px/1 'JetBrains Mono';
+  --text-badge: 700 11px/1 'JetBrains Mono';
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --content-py: 24px;
+    --content-px: 24px;
+    --topbar-px: 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --content-py: 20px;
+    --content-px: 20px;
+    --topbar-px: 14px;
+  }
+}
+
+@media (max-width: 980px) {
+  :root {
+    --topbar-px: 16px;
+  }
 }
 
 * {
@@ -72,25 +101,13 @@
 
 html,
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--surface);
   color: var(--ink);
   font-family: 'Inter', sans-serif;
-
-  // Reset the user agent margin.
   margin: 0;
-  //WHY?
-  // height: 100%;
   min-height: 100%;
 }
-/* You can add global styles to this file, and also import other style files */
 
 body {
   overflow-x: hidden;
@@ -100,7 +117,6 @@ button,
 input {
   font: inherit;
   border-radius: var(--r-sm);
-
 }
 
 h1,
@@ -117,6 +133,21 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+
+.text-h1 { font: var(--text-h1); }
+.text-h2 { font: var(--text-h2); }
+
+.text-body-lg { font: var(--text-body-lg); }
+.text-body { font: var(--text-body); }
+.text-caption { font: var(--text-caption); }
+.text-xs { font: var(--text-xs); }
+
+.text-mono-lg { font: var(--text-mono-lg); }
+.text-mono { font: var(--text-mono); }
+.text-mono-sm { font: var(--text-mono-sm); }
+.text-mono-xs-bold { font: var(--text-mono-xs-bold); }
+.text-notif { font: var(--text-notif); }
+.text-badge { font: var(--text-badge);}
 
 .material-icons-round {
   font-family: 'Material Icons Round';
@@ -137,6 +168,36 @@ table {
   font-family: 'Syne', sans-serif;
 }
 
+.icon-btn {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  outline: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-3);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition:
+    background-color var(--t),
+    color var(--t),
+    transform var(--t);
+  flex: 0 0 auto;
+}
+
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+
+.icon-glyph {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
 .fade-up {
   animation: fadeUp 0.3s ease forwards;
 }
@@ -149,5 +210,14 @@ table {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--value);
   }
 }

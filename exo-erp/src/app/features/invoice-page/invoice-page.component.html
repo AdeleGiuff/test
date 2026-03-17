@@ -11,19 +11,20 @@
 <section class="invoice-list page-card">
     <div class="panel-header">
         <div class="title-block">
-            <div class="panel-title syne">Elenco Fatture</div>
-            <div class="panel-sub">Seleziona una fattura per visualizzare il dettaglio</div>
+            <div class="panel-title text-h2">Elenco Fatture</div>
+            <div class="panel-sub text-caption">Seleziona una fattura per visualizzare il dettaglio</div>
         </div>
 
-        <div class="total-chip mono">{{ filteredInvoices.length }} TOTALI</div>
+        <div class="total-chip text-xs">{{ filteredInvoices.length }} TOTALI</div>
 
         <div class="search-box">
             <span class="material-icons-round">search</span>
-            <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Cerca fattura, cliente..." />
+            <input class="text-body" type="text" [(ngModel)]="searchTerm" (input)="onSearch()"
+                placeholder="Cerca fattura, cliente..." />
         </div>
 
-        <button class="ghost-btn">Filtri</button>
-        <button class="primary-btn">
+        <button class="ghost-btn text-body">Filtri</button>
+        <button class="primary-btn text-body">
             <span class="material-icons-round">add</span>
             Nuova Fattura
         </button>
@@ -33,14 +34,14 @@
         <table>
             <thead>
                 <tr>
-                    <th>N° FATTURA</th>
-                    <th>CLIENTE</th>
-                    <th>DATA EMISSIONE</th>
-                    <th>SCADENZA</th>
-                    <th>IMPONIBILE</th>
-                    <th>IVA</th>
-                    <th>TOTALE</th>
-                    <th>STATO</th>
+                    <th class="text-xs">N° FATTURA</th>
+                    <th class="text-xs">CLIENTE</th>
+                    <th class="text-xs">DATA EMISSIONE</th>
+                    <th class="text-xs">SCADENZA</th>
+                    <th class="text-xs">IMPONIBILE</th>
+                    <th class="text-xs">IVA</th>
+                    <th class="text-xs">TOTALE</th>
+                    <th class="text-xs">STATO</th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,18 +49,18 @@
             <tbody>
                 @for (invoice of filteredInvoices; track invoice.id) {
                 <tr (click)="selectInvoice(invoice)" [class.selected]="selectedInvoice.id === invoice.id">
-                    <td class="invoice-id mono">{{ invoice.id }}</td>
+                    <td class="invoice-id text-mono">{{ invoice.id }}</td>
 
                     <td>
-                        <div class="customer-name">{{ invoice.customer }}</div>
-                        <div class="customer-vat mono">P. IVA {{ invoice.vatNumber }}</div>
+                        <div class="customer-name text-body-lg">{{ invoice.customer }}</div>
+                        <div class="customer-vat text-mono-sm">P. IVA {{ invoice.vatNumber }}</div>
                     </td>
 
-                    <td class="date-cell">{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</td>
-                    <td class="date-cell">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}</td>
-                    <td class="amount mono">{{ formatEuro(invoice.taxableAmount) }}</td>
-                    <td class="vat mono muted-amount">{{ formatEuro(invoice.vatAmount) }}</td>
-                    <td class="amount mono">{{ formatEuro(invoice.totalAmount) }}</td>
+                    <td class="date-cell text-body-lg">{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</td>
+                    <td class="date-cell text-body-lg">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}</td>
+                    <td class="amount text-mono">{{ formatEuro(invoice.taxableAmount) }}</td>
+                    <td class="muted-amount text-mono">{{ formatEuro(invoice.vatAmount) }}</td>
+                    <td class="amount text-mono">{{ formatEuro(invoice.totalAmount) }}</td>
 
                     <td>
                         <app-status-badge [status]="invoice.status" />
@@ -85,59 +86,52 @@
     </div>
 </section>
 
-<section #detailPanel class="detail-panel fade-up">
+<section #detailPanel class="detail-panel">
     <div class="detail-header">
         <div class="left">
-            <div class="detail-id mono">{{ selectedInvoice.id }}</div>
-            <div class="detail-customer">
-                {{ selectedInvoice.customer }} — P.IVA {{ selectedInvoice.vatNumber }}
-            </div>
+            <div class="detail-id text-mono-lg">{{ selectedInvoice.id }}</div>
+            <div class="detail-customer text-body">{{ selectedInvoice.customer }} — P.IVA {{ selectedInvoice.vatNumber
+                }}</div>
         </div>
 
         <div class="right">
-            <div class="meta">
-                <div class="meta-label">EMISSIONE</div>
-                <div class="meta-value mono">
-                    {{ selectedInvoice.issueDate | date: 'dd/MM/yyyy' }}
-                </div>
+            <div>
+                <div class="meta-label text-xs">EMISSIONE</div>
+                <div class="meta-value text-body">{{ selectedInvoice.issueDate | date: 'dd/MM/yyyy' }}</div>
             </div>
 
-            <div class="meta">
-                <div class="meta-label">SCADENZA</div>
-                <div class="meta-value mono">
-                    {{ selectedInvoice.dueDate | date: 'dd/MM/yyyy' }}
-                </div>
+            <div>
+                <div class="meta-label text-xs">SCADENZA</div>
+                <div class="meta-value text-body">{{ selectedInvoice.dueDate | date: 'dd/MM/yyyy' }}</div>
             </div>
 
-            <div class="meta">
-                <div class="meta-label">STATO</div>
+            <div>
+                <div class="meta-label text-xs">STATO</div>
                 <div class="meta-value">
                     <app-status-badge [status]="selectedInvoice.status" />
                 </div>
             </div>
 
-            <div class="meta total-meta">
-                <div class="meta-label">TOTALE FATTURA</div>
-                <div class="meta-total mono">
-                    {{ formatEuro(selectedInvoice.totalAmount) }}
-                </div>
+            <div>
+                <div class="meta-label text-xs">TOTALE FATTURA</div>
+                <div class="meta-total text-mono-lg">{{ formatEuro(selectedInvoice.totalAmount) }}</div>
             </div>
         </div>
     </div>
 
-    <div class="detail-table-header">Righe di Dettaglio</div>
+    <div class="detail-table-header text-xs">Righe di Dettaglio</div>
 
     <div class="detail-table-wrap page-card">
         <table>
             <thead>
                 <tr>
-                    <th>CODICE</th>
-                    <th>DESCRIZIONE</th>
-                    <th>QUANTITÀ</th>
-                    <th>PREZZO UNIT.</th>
-                    <th>IVA %</th>
-                    <th>IVA €</th>
-                    <th>TOTALE RIGA</th>
+                    <th class="text-xs">CODICE</th>
+                    <th class="text-xs">DESCRIZIONE</th>
+                    <th class="text-xs">QUANTITÀ</th>
+                    <th class="text-xs">PREZZO UNIT.</th>
+                    <th class="text-xs">IVA %</th>
+                    <th class="text-xs">IVA €</th>
+                    <th class="text-xs">TOTALE RIGA</th>
                 </tr>
             </thead>
 
@@ -145,42 +139,42 @@
                 @for (row of selectedInvoice.rows; track row.code) {
                 <tr>
                     <td>
-                        <span class="code-pill mono">{{ row.code }}</span>
+                        <span class="code-pill text-mono-sm">{{ row.code }}</span>
                     </td>
 
                     <td>
-                        <div class="row-desc">{{ row.description }}</div>
-                        <div class="row-unit">{{ row.unit }}</div>
+                        <div class="row-desc text-body">{{ row.description }}</div>
+                        <div class="row-unit text-mono-sm">{{ row.unit }}</div>
                     </td>
 
-                    <td class="mono align-right">{{ row.quantity }}</td>
-                    <td class="mono align-right">{{ formatEuro(row.unitPrice) }}</td>
-                    <td class="mono align-right">{{ row.vatRate }}%</td>
-                    <td class="mono align-right">{{ formatEuro(row.vatAmount) }}</td>
-                    <td class="mono align-right total-line">{{ formatEuro(row.total) }}</td>
+                    <td class="text-mono align-right">{{ row.quantity }}</td>
+                    <td class="text-mono align-right">{{ formatEuro(row.unitPrice) }}</td>
+                    <td class="text-mono align-right">{{ row.vatRate }}%</td>
+                    <td class="text-mono align-right">{{ formatEuro(row.vatAmount) }}</td>
+                    <td class="text-mono align-right total-line">{{ formatEuro(row.total) }}</td>
                 </tr>
                 }
             </tbody>
         </table>
 
         <div class="detail-footer">
-            <div class="footer-note">
+            <div class="footer-note text-caption">
                 <span class="material-icons-round">info</span>
                 <span>{{ selectedInvoice.note }}</span>
             </div>
 
             <div class="totals">
                 <div class="total-row">
-                    <span>Imponibile</span>
-                    <strong class="mono">{{ formatEuro(selectedInvoice.taxableAmount) }}</strong>
+                    <span class="text-body">Imponibile</span>
+                    <strong class="text-mono">{{ formatEuro(selectedInvoice.taxableAmount) }}</strong>
                 </div>
                 <div class="total-row">
-                    <span>IVA (22%)</span>
-                    <strong class="mono">{{ formatEuro(selectedInvoice.vatAmount) }}</strong>
+                    <span class="text-body">IVA (22%)</span>
+                    <strong class="text-mono">{{ formatEuro(selectedInvoice.vatAmount) }}</strong>
                 </div>
                 <div class="total-row grand">
-                    <span>TOTALE FATTURA</span>
-                    <strong class="mono">{{ formatEuro(selectedInvoice.totalAmount) }}</strong>
+                    <span class="text-body-lg">TOTALE FATTURA</span>
+                    <strong class="text-mono-lg">{{ formatEuro(selectedInvoice.totalAmount) }}</strong>
                 </div>
             </div>
         </div>
