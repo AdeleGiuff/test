@@ -30,6 +30,23 @@
         </button>
     </div>
 
+    @if (filteredInvoices.length === 0) {
+    <div class="empty-state">
+        <span class="material-icons-round empty-icon">receipt_long</span>
+
+        <div class="empty-title text-body-lg">
+            Nessuna fattura trovata
+        </div>
+
+        <div class="empty-sub text-caption">
+            Prova a modificare la ricerca o i filtri applicati
+        </div>
+
+        <button class="ghost-btn text-body" (click)="searchTerm = ''; onSearch()">
+            Reset ricerca
+        </button>
+    </div>
+    } @else {
     <div class="table-wrap">
         <table>
             <thead>
@@ -48,7 +65,7 @@
 
             <tbody>
                 @for (invoice of filteredInvoices; track invoice.id) {
-                <tr (click)="selectInvoice(invoice)" [class.selected]="selectedInvoice.id === invoice.id">
+                <tr (click)="selectInvoice(invoice)" [class.selected]="selectedInvoice?.id === invoice.id">
                     <td class="invoice-id text-mono" data-label="N° Fattura">{{ invoice.id }}</td>
 
                     <td data-label="Cliente">
@@ -56,16 +73,28 @@
                         <div class="customer-vat text-mono-sm">P. IVA {{ invoice.vatNumber }}</div>
                     </td>
 
-                    <td class="date-cell text-body-lg" data-label="Data emissione">{{ invoice.issueDate | date:
-                        'dd/MM/yyyy' }}</td>
-                    <td class="date-cell text-body-lg" data-label="Scadenza">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}
+                    <td class="date-cell text-body-lg" data-label="Data emissione">
+                        {{ invoice.issueDate | date:'dd/MM/yyyy' }}
                     </td>
-                    <td class="amount text-mono" data-label="Imponibile">{{ formatEuro(invoice.taxableAmount) }}</td>
-                    <td class="muted-amount text-mono" data-label="Iva">{{ formatEuro(invoice.vatAmount) }}</td>
-                    <td class="amount text-mono" data-label="Totale">{{ formatEuro(invoice.totalAmount) }}</td>
+
+                    <td class="date-cell text-body-lg" data-label="Scadenza">
+                        {{ invoice.dueDate | date:'dd/MM/yyyy' }}
+                    </td>
+
+                    <td class="amount text-mono" data-label="Imponibile">
+                        {{ formatEuro(invoice.taxableAmount) }}
+                    </td>
+
+                    <td class="muted-amount text-mono" data-label="Iva">
+                        {{ formatEuro(invoice.vatAmount) }}
+                    </td>
+
+                    <td class="amount text-mono" data-label="Totale">
+                        {{ formatEuro(invoice.totalAmount) }}
+                    </td>
 
                     <td data-label="Stato">
-                        <app-status-badge [status]="invoice.status" />
+                        <app-status-badge [status]="invoice.status"></app-status-badge>
                     </td>
 
                     <td class="row-actions-cell">
@@ -86,8 +115,9 @@
             </tbody>
         </table>
     </div>
+    }
 </section>
-
+@if (selectedInvoice && filteredInvoices.length > 0) {
 <section #detailPanel class="detail-panel">
     <div class="detail-header">
         <div class="left">
@@ -182,3 +212,4 @@
         </div>
     </div>
 </section>
+}

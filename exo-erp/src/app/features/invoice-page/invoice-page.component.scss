@@ -426,6 +426,32 @@
   font-variant-numeric: tabular-nums;
 }
 
+.empty-state {
+  padding: 32px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 32px;
+  color: var(--ink-3);
+  opacity: 0.6;
+}
+
+.empty-title {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.empty-sub {
+  color: var(--muted);
+  max-width: 280px;
+}
+
 @media (max-width: 1300px) {
   .kpi-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -23,7 +23,7 @@ import { StatusBadgeComponent } from '../../shared/components/status-badge/statu
 export class InvoicePageComponent implements AfterViewInit {
     invoices: Invoice[] = MOCK_INVOICES;
     filteredInvoices: Invoice[] = [...MOCK_INVOICES];
-    selectedInvoice: Invoice = MOCK_INVOICES[2];
+    selectedInvoice: Invoice | null = MOCK_INVOICES[2] ?? null;
     searchTerm = '';
 
     @ViewChild('detailPanel') detailPanel!: ElementRef<HTMLElement>;
@@ -32,7 +32,7 @@ export class InvoicePageComponent implements AfterViewInit {
 
     selectInvoice(invoice: Invoice): void {
         this.selectedInvoice = invoice;
-
+        // alla selezione della riga compare il detail panel con scrollo automatico
         setTimeout(() => {
             this.detailPanel?.nativeElement.scrollIntoView({
                 behavior: 'smooth',
@@ -44,19 +44,17 @@ export class InvoicePageComponent implements AfterViewInit {
     onSearch(): void {
         const term = this.searchTerm.trim().toLowerCase();
 
-        this.filteredInvoices = this.invoices.filter((invoice) => {
-            return (
-                invoice.id.toLowerCase().includes(term) ||
-                invoice.customer.toLowerCase().includes(term)
-            );
-        });
+        this.filteredInvoices = this.invoices.filter((invoice) =>
+            invoice.id.toLowerCase().includes(term) ||
+            invoice.customer.toLowerCase().includes(term)
+        );
+        console.log(this.filteredInvoices)
 
-        if (
-            this.filteredInvoices.length &&
-            !this.filteredInvoices.find((x) => x.id === this.selectedInvoice.id)
-        ) {
-            this.selectedInvoice = this.filteredInvoices[0];
-        }
+        this.selectedInvoice = this.filteredInvoices.length > 0
+            ? this.filteredInvoices[0]
+            : null;
+
+
     }
 
     formatEuro(value: number): string {
