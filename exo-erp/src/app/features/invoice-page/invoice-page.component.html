@@ -49,20 +49,22 @@
             <tbody>
                 @for (invoice of filteredInvoices; track invoice.id) {
                 <tr (click)="selectInvoice(invoice)" [class.selected]="selectedInvoice.id === invoice.id">
-                    <td class="invoice-id text-mono">{{ invoice.id }}</td>
+                    <td class="invoice-id text-mono" data-label="N° Fattura">{{ invoice.id }}</td>
 
-                    <td>
+                    <td data-label="Cliente">
                         <div class="customer-name text-body-lg">{{ invoice.customer }}</div>
                         <div class="customer-vat text-mono-sm">P. IVA {{ invoice.vatNumber }}</div>
                     </td>
 
-                    <td class="date-cell text-body-lg">{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</td>
-                    <td class="date-cell text-body-lg">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}</td>
-                    <td class="amount text-mono">{{ formatEuro(invoice.taxableAmount) }}</td>
-                    <td class="muted-amount text-mono">{{ formatEuro(invoice.vatAmount) }}</td>
-                    <td class="amount text-mono">{{ formatEuro(invoice.totalAmount) }}</td>
+                    <td class="date-cell text-body-lg" data-label="Data emissione">{{ invoice.issueDate | date:
+                        'dd/MM/yyyy' }}</td>
+                    <td class="date-cell text-body-lg" data-label="Scadenza">{{ invoice.dueDate | date: 'dd/MM/yyyy' }}
+                    </td>
+                    <td class="amount text-mono" data-label="Imponibile">{{ formatEuro(invoice.taxableAmount) }}</td>
+                    <td class="muted-amount text-mono" data-label="Iva">{{ formatEuro(invoice.vatAmount) }}</td>
+                    <td class="amount text-mono" data-label="Totale">{{ formatEuro(invoice.totalAmount) }}</td>
 
-                    <td>
+                    <td data-label="Stato">
                         <app-status-badge [status]="invoice.status" />
                     </td>
 
